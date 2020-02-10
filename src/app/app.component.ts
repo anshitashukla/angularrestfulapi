@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SpotifyService } from 'spotify/spotify.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+
+  isLoading=true;
+  constructor(private _spotifyService: SpotifyService){}
+  ngOnInit(){
+    this._spotifyService.getSpotifyData()
+    .subscribe(data => {this.isLoading=false;console.log(data)});
+    }
 }
